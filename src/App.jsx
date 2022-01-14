@@ -3,10 +3,6 @@ import { GridItem, Grid, Image, Flex, Center, Text, Square, useDisclosure } from
 import { ethers } from 'ethers';
 import './App.css';
 
-
-
-
-
 import { CONTRACT_ADDRESS, NFT_IMAGE_URL, BASE_CONTRACT } from './constants';
 import contractABI from './utils/ImageNft.json';
 
@@ -14,7 +10,6 @@ const App = () => {
     // State
     const [currentAccount, setCurrentAccount] = useState(null);
     const [theContract, setContract] = useState(null);
-
 
     // Actions
     const installMetamskAction = () => {
@@ -151,7 +146,6 @@ const App = () => {
                 >
                     View on Etherscan
                 </button>
-
             </div>
 
         );
@@ -168,18 +162,9 @@ const App = () => {
                 alert('Get MetaMask!');
                 return;
             }
-
-            /*
-            
-             * Fancy method to request access to account.
-             */
             const accounts = await ethereum.request({
                 method: 'eth_requestAccounts',
             });
-
-            /*
-             * Boom! This should print out public address once we authorize Metamask.
-             */
             console.log('Connected', accounts[0]);
             setCurrentAccount(accounts[0]);
         } catch (error) {

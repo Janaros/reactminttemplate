@@ -4,23 +4,17 @@ import { ethers } from 'ethers';
 import './App.css';
 
 
-/*
-* Just add transformCharacterData!
-*/
+
+
+
 import { CONTRACT_ADDRESS, NFT_IMAGE_URL, BASE_CONTRACT } from './constants';
 import contractABI from './utils/ImageNft.json';
 
 const App = () => {
     // State
     const [currentAccount, setCurrentAccount] = useState(null);
-    const [characters, setCharacters] = useState([]);
     const [theContract, setContract] = useState(null);
 
-
-    /*
-    * Right under current account, setup this new state property
-    */
-    const [characterNFT, setCharacterNFT] = useState(null);
 
     // Actions
     const installMetamskAction = () => {
@@ -35,7 +29,7 @@ const App = () => {
         try {
             if (theContract) {
                 console.log('Minting NFT in progress...');
-                //TODO exclude to constants
+                
                 var tokenUri = NFT_IMAGE_URL;
 
                 var tokenName = 'TestToken';
@@ -125,16 +119,12 @@ const App = () => {
 
                 </div>
             );
-            /*
-            * If there is a connected wallet and characterNFT, it's time to battle!
-            */
+         
         }
     };
     const renderNftImage = () => {
         return (
-
             <img
-
                 src='https://arweave.net/XNHzamgzyZ5Liga535HaZvsJYpzq3J_qbawsvvsAPlk'
                 width='50%'
                 alt='SWMS' />
@@ -168,7 +158,7 @@ const App = () => {
     };
 
     /*
-     * Implement your connectWallet method here
+     * Connect to Wallet
      */
     const connectWalletAction = async () => {
         try {
@@ -234,15 +224,14 @@ const App = () => {
         }
     }, []);
     /*
-   * Add this useEffect right under the other useEffect where you are calling checkIfWalletIsConnected
+   * Effects
    */
     useEffect(() => {
         /*
          * The function we will call that interacts with out smart contract
          */
         const fetchNFTMetadata = async () => {
-            console.log('Checking if user has mint already', currentAccount);
-
+            
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
             const theContract = new ethers.Contract(
